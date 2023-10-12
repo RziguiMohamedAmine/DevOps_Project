@@ -1,10 +1,12 @@
 package tn.esprit.devops_project.services;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.devops_project.entities.ActivitySector;
 import tn.esprit.devops_project.repositories.ActivitySectorRepository;
@@ -25,6 +27,11 @@ class ActivitySectorImplTest {
 
     @Mock
     private ActivitySectorRepository activitySectorRepository;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     void testretrieveAllActivitySectors() {
@@ -114,5 +121,32 @@ class ActivitySectorImplTest {
         assertEquals(activitySector, result);
 
 
+    }
+
+    @Test
+    void testUpdateActivitySector_NonExisting() {
+        ActivitySector activitySector = new ActivitySector();
+
+        when(activitySectorRepository.save(activitySector)).thenThrow(new IllegalArgumentException("ActivitySector does not exist."));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            activitySectorservice.updateActivitySector(activitySector);
+        });
+
+        verify(activitySectorRepository).save(activitySector);
+    }
+
+
+    @Test
+    void testDeleteActivitySector_NonExisting() {
+        Long invalidId = 999L;
+
+        doThrow(new IllegalArgumentException("ActivitySector does not exist.")).when(activitySectorRepository).deleteById(invalidId);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            activitySectorservice.deleteActivitySector(invalidId);
+        });
+
+        verify(activitySectorRepository).deleteById(invalidId);
     }
 }
