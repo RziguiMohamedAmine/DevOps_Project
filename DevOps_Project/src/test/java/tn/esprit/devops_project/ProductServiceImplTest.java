@@ -52,7 +52,7 @@ class ProductServiceImplTest {
         assertEquals(stock, product.getStock());
         assertEquals(product, result);
 
-    }
+    } 
 
     @Test
     void retrieveProduct() {
