@@ -6,7 +6,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - sqldata :/var/lib/mysql
+      - sqldata:/var/lib/mysql
 
   devops-project:
     container_name: devops
@@ -15,12 +15,12 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/devops?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true
     image: "devops-projects"
     depends_on:
       - mysql
     volumes:
       - .m2:/root/.m2
 
-volumes: 
+volumes:
   sqldata:
