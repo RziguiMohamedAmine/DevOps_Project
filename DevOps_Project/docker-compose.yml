@@ -1,0 +1,26 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    volumes:
+      - sqldata :/var/lib/mysql
+
+  devops-project:
+    container_name: devops
+    build: ./
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/devops?createDatabaseIfNotExist=true
+    image: "devops-projects"
+    depends_on:
+      - mysql
+    volumes:
+      - .m2:/root/.m2
+
+volumes:
+  sqldata:
