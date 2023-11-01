@@ -4,7 +4,7 @@ services:
     image: mysql:latest
     restart: unless-stopped
     ports:
-      - "3308:3308"
+      - "3307:3307"
     volumes:
       - sqldata:/var/lib/mysql
 
@@ -16,7 +16,7 @@ services:
       - "8082:8082"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true
-    image: "devops-projects"
+    image: "devops_project"
     depends_on:
       - mysql
     volumes:
