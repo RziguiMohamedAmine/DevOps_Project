@@ -22,5 +22,5 @@ services:
     volumes:
       - .m2:/root/.m2
 
-volumes:
+volumes: 
   sqldata:
