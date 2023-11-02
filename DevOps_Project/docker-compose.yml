@@ -1,10 +1,12 @@
 version: '2'
 services:
   mysql:
-    image: mysql:latest
+    image: "mysql-container"
     restart: unless-stopped
     ports:
       - "3306:3306"
+    environment:
+      MYSQL_USER: root
     volumes:
       - sqldata:/var/lib/mysql
 
