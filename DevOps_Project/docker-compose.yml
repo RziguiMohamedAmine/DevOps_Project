@@ -4,7 +4,7 @@ services:
     image: mysql:latest
     restart: unless-stopped
     ports:
-      - "3307:3307"
+      - "3306:3306"
     volumes:
       - sqldata:/var/lib/mysql
 

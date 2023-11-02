@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import tn.esprit.devops_project.entities.Stock;
 import tn.esprit.devops_project.repositories.StockRepository;
 import tn.esprit.devops_project.services.StockServiceImpl;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
+@Profile("test")
 class StockServiceImplTest {
     @InjectMocks
     private StockServiceImpl stockService;
@@ -150,5 +152,25 @@ class StockServiceImplTest {
         assertEquals("Test Stock", updatedStock.getTitle());
         assertEquals(updatedStock.getIdStock(), mockStock.getIdStock());
     }
+
+
+    @Test
+    public void AddStockTest() {
+        Stock mockStock = new Stock();
+        mockStock.setIdStock(1L);
+        mockStock.setTitle("Test Stock Autowired");
+        mockStock.setProducts(new HashSet<>());
+
+        //stockRepositoryAuto.save(mockStock);
+
+        Stock addedStock = stockServiceAuto.addStock(mockStock);
+        assertNotNull(addedStock);
+        assertEquals("Test Stock Autowired", addedStock.getTitle());
+        assertEquals(addedStock.getIdStock(), mockStock.getIdStock());
+    }
+
+
+
+
 
 }
