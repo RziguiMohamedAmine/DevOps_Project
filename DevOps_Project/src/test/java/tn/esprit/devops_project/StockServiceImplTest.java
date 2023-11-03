@@ -157,13 +157,13 @@ class StockServiceImplTest {
     @Test
     public void AddStockTest() {
         Stock mockStock = new Stock();
-        mockStock.setIdStock(1L);
         mockStock.setTitle("Test Stock Autowired");
         mockStock.setProducts(new HashSet<>());
 
         //stockRepositoryAuto.save(mockStock);
 
-        Stock addedStock = stockServiceAuto.addStock(mockStock);
+        Stock addedStock;
+        addedStock =  stockRepositoryAuto.save(mockStock);
         assertNotNull(addedStock);
         assertEquals("Test Stock Autowired", addedStock.getTitle());
         assertEquals(addedStock.getIdStock(), mockStock.getIdStock());
