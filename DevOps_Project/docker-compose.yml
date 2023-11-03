@@ -1,19 +1,21 @@
 version: '2'
 services:
   mysqlDev-container:
+    container_name: mysqlDev-container
     image: mysql:latest
     restart: unless-stopped
     environment:
       #MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: ""
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: devops
+      #MYSQL_DATABASE: devops
     ports:
       - "3306:3306"
     volumes:
       - sqldata:/var/lib/mysql
 
   devops-project:
+    container_name: devops-project
     depends_on:
       - mysqlDev-container
     build: ./
