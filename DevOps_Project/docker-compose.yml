@@ -1,9 +1,9 @@
 version: '2'
 services:
-  mysql:
+  mysql-container:
     image: mysql:latest
     container_name: mysql-container
-    restart: unless-stopped
+    restart: always
     ports:
       - "3306:3306"
     environment:
@@ -20,7 +20,7 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - mysql
+      - mysql-container
     volumes:
       - .m2:/root/.m2
 
