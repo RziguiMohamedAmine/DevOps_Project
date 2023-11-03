@@ -3,7 +3,7 @@ services:
   mysqlDev-container:
     image: mysql:latest
     container_name: mysqlDev-container
-    restart: always
+    restart: on-failure
     ports:
       - "3306:3306"
     environment:
