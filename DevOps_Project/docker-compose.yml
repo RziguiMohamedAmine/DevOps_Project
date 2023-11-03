@@ -1,12 +1,15 @@
 version: '2'
 services:
   mysql:
-    image: "mysql-container"
+    image: mysql:latest
+    container_name: mysql-container
     restart: unless-stopped
     ports:
       - "3306:3306"
     environment:
       MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - sqldata:/var/lib/mysql
 
@@ -16,9 +19,6 @@ services:
     restart: on-failure
     ports:
       - "8082:8082"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true
-    image: "devops_project"
     depends_on:
       - mysql
     volumes:
