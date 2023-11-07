@@ -1,14 +1,13 @@
 pipeline {
     agent any
 
-tools{
-   jdk 'JAVA_HOME'
-   maven 'M2_HOME'
-}
+    tools {
+        jdk 'JAVA_HOME'
+        maven 'M2_HOME'
+    }
     environment {
         GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
         GIT_CREDENTIAL_ID = 'Jenkins'
-        
         BRANCH_NAME = 'activityModule'
     }
 
@@ -18,24 +17,36 @@ tools{
                 script {
                     withCredentials([usernamePassword(credentialsId: GIT_CREDENTIAL_ID, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         dir('DevOps_Project') {
-                        checkout([$class: 'GitSCM', branches: [[name: "$BRANCH_NAME"]], userRemoteConfigs: [[url: "$GIT_REPO", credentialsId: GIT_CREDENTIAL_ID]]])
-                    }
+                            checkout([$class: 'GitSCM', branches: [[name: "$BRANCH_NAME"]], userRemoteConfigs: [[url: "$GIT_REPO", credentialsId: GIT_CREDENTIAL_ID]])
+                        }
                     }
                 }
             }
         }
-       
-
 
         stage('Compile') {
             steps {
-                sh "${maven}/bin/mvn compile"
+                script {
+                    // Use the 'maven' tool defined in the 'tools' section
+                    def mavenTool = tool name: 'maven', type: 'Maven'
+
+                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                        sh 'mvn compile'
+                    }
+                }
             }
         }
 
         stage('Clean and Build') {
             steps {
-                sh "${maven}/bin/mvn clean package"
+                script {
+                    // Use the 'maven' tool defined in the 'tools' section
+                    def mavenTool = tool name: 'maven', type: 'Maven'
+
+                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                        sh 'mvn clean package'
+                    }
+                }
             }
         }
     }
