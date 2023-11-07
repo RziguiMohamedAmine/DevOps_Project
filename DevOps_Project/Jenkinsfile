@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
         GIT_CREDENTIAL_ID = 'Jenkins'
-        maven = tool name: 'M2_HOME', type: 'Maven'
+        MAVEN_HOME = tool name: 'M2_HOME', type: 'Maven'
         JAVA_HOME = tool name: 'JAVA_HOME', type: 'JDK'
         BRANCH_NAME = 'activityModule'
     }
@@ -26,13 +26,13 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh "${maven}/bin/mvn compile"
+                sh "${MAVEN_HOME}/bin/mvn compile"
             }
         }
 
         stage('Clean and Build') {
             steps {
-                sh "${maven}/bin/mvn clean package"
+                sh "${MAVEN_HOME}/bin/mvn clean package"
             }
         }
     }
