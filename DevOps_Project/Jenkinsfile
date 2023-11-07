@@ -41,17 +41,13 @@ pipeline {
                         }
 
  stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('Your-SonarQube-Server-Name') {
-                    // Run the SonarQube analysis
-                    script {
-                        dir('DevOps_Project') {
-                        sh 'mvn clean install sonar:sonar'
-                    }
-                    }
-                }
-            }
+    steps {
+        withSonarQubeEnv('SonarQube') {
+            sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
         }
+    }
+}
+
 
 
     //     stage('Clean and Build') {
