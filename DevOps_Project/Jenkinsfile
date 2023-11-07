@@ -4,8 +4,8 @@ pipeline {
     environment {
         GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
         GIT_CREDENTIAL_ID = 'Jenkins'
-        maven 'M2_HOME'
-        jdk 'JAVA_HOME'
+        maven ='M2_HOME'
+        jdk ='JAVA_HOME'
         JAVA_HOME = tool name: 'JAVA_HOME', type: 'JDK'
         BRANCH_NAME = 'activityModule'
     }
