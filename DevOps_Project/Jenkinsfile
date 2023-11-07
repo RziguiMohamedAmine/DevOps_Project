@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         jdk 'JAVA_HOME'
-        maven 'M2_HOME'
+        maven 'M2_HOME'  // Use the correct tool name defined in Jenkins
     }
     environment {
         GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
@@ -27,8 +27,8 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                    // Use the 'maven' tool defined in the 'tools' section
-                    def mavenTool = tool name: 'maven', type: 'maven'
+                    // Use the 'M2_HOME' tool defined in the 'tools' section
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                         sh 'mvn compile'
@@ -40,8 +40,8 @@ pipeline {
         stage('Clean and Build') {
             steps {
                 script {
-                    // Use the 'maven' tool defined in the 'tools' section
-                    def mavenTool = tool name: 'maven', type: 'maven'
+                    // Use the 'M2_HOME' tool defined in the 'tools' section
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                         sh 'mvn clean package'
