@@ -25,20 +25,20 @@ pipeline {
         }
 
         stage('Compile') {
-    steps {
-        script {
-            // Use the 'M2_HOME' tool defined in the 'tools' section
-            def mavenTool = tool name: 'M2_HOME', type: 'maven'
+             steps {
+                  script {
+                   
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
-            withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                // Change to the 'DevOps_Project' directory
-                dir('DevOps_Project') {
+                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                     
+                    dir('DevOps_Project') {
                     sh 'mvn compile'
-                }
-            }
-        }
-    }
-}
+                    }
+                    }
+                        }
+                    }
+                        }
 
  stage('SonarQube Analysis') {
             steps {
@@ -70,3 +70,5 @@ pipeline {
     //     }
     // }
 }
+}
+
