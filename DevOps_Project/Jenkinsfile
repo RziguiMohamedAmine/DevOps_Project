@@ -40,20 +40,33 @@ pipeline {
     }
 }
 
-
-        stage('Clean and Build') {
+ stage('SonarQube Analysis') {
             steps {
-                script {
-                    // Use the 'M2_HOME' tool defined in the 'tools' section
-                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
-
-                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                withSonarQubeEnv('Your-SonarQube-Server-Name') {
+                    // Run the SonarQube analysis
+                    script {
                         dir('DevOps_Project') {
-                        sh 'mvn clean package'
-                        }
+                        sh 'mvn clean install sonar:sonar'
+                    }
                     }
                 }
             }
         }
-    }
+
+
+    //     stage('Clean and Build') {
+    //         steps {
+    //             script {
+    //                 // Use the 'M2_HOME' tool defined in the 'tools' section
+    //                 def mavenTool = tool name: 'M2_HOME', type: 'maven'
+
+    //                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+    //                     dir('DevOps_Project') {
+    //                     sh 'mvn clean package'
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
