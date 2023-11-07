@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     // Use the 'maven' tool defined in the 'tools' section
-                    def mavenTool = tool name: 'maven', type: 'Maven'
+                    def mavenTool = tool name: 'maven', type: 'maven'
 
                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                         sh 'mvn compile'
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     // Use the 'maven' tool defined in the 'tools' section
-                    def mavenTool = tool name: 'maven', type: 'Maven'
+                    def mavenTool = tool name: 'maven', type: 'maven'
 
                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                         sh 'mvn clean package'
