@@ -2,8 +2,8 @@ pipeline {
     agent any
 
 Tools{
-   Jdk 'JAVA_HOME'
-   Maven 'M2_HOME'
+   jdk 'JAVA_HOME'
+   maven 'M2_HOME'
 }
     environment {
         GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
