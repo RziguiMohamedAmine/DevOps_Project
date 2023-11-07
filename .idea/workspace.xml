@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb2c8b74-37af-428e-bcca-308e6808a593" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevOps_Project/src/test/java/tn/esprit/devops_project/InvoiceServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DevOps_Project/src/main/java/tn/esprit/devops_project/services/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/DevOps_Project/src/main/java/tn/esprit/devops_project/services/InvoiceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +106,7 @@
       <updated>1699191016983</updated>
       <workItem from="1699191018459" duration="3130000" />
       <workItem from="1699262585023" duration="768000" />
-      <workItem from="1699357443795" duration="1305000" />
+      <workItem from="1699357443795" duration="1904000" />
     </task>
     <servers />
   </component>
