@@ -72,20 +72,24 @@ pipeline {
     //     }
     // }
 
-    stage('Build Artifact') {
+   stage('Build Artifact') {
     steps {
         script {
             def mavenTool = tool name: 'M2_HOME', type: 'maven'
             def artifactDir = 'target' // The directory where the JAR file will be generated
 
-            withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                sh "mvn package" // Build the JAR file
+            // Change the working directory to your project's directory (where the POM file is located)
+            dir('DevOps_Project/DevOps_Project') {
+                withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                    sh "mvn package" // Build the JAR file
+                }
             }
 
             archiveArtifacts artifacts: "${artifactDir}/*.jar", allowEmptyArchive: true
         }
     }
 }
+
 
         
         }
