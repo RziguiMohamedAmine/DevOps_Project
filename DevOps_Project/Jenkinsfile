@@ -152,10 +152,9 @@ pipeline {
 //         }
 //     }
 // }
-
-
+        
 stage('Deploy Docker Image') {
-    steps {
+    
         steps {
                 script {
                     def mavenTool = tool name: 'M2_HOME', type: 'maven'
@@ -172,8 +171,9 @@ stage('Deploy Docker Image') {
                     }
                 }
         }
-    }
+    
 }
+
 
 
 
