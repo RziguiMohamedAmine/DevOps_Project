@@ -155,7 +155,7 @@ stage('Deploy Docker Image') {
         script {
             
             def mavenTool = tool name: 'M2_HOME', type: 'maven'
-            def dockerBuildDir = 'activityModule/DevOps_Project'
+            def dockerBuildDir = 'activityModule/DevOps_Project/DevOps_Project'
 
             echo " OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: ${pwd()}"
         
