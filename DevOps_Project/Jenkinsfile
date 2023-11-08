@@ -160,6 +160,9 @@ pipeline {
             dir('activityModule/DevOps_Project/DevOps_Project') {
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                     // Build the Docker image
+                    sh "pwd"
+sh "ls -al /var/lib/jenkins/workspace/DevOps_Project_p/activityModule/DevOps_Project/DevOps_Project"
+
                     sh "docker build -t activ:activ -f /var/lib/jenkins/workspace/DevOps_Project_p/activityModule/DevOps_Project/DevOps_Project/Dockerfile ."
 
 
