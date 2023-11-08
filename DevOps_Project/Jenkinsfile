@@ -169,7 +169,7 @@ stage('Deploy Docker Image') {
                     sh "ls -al"
 
                     // Build the Docker image
-                    sh "docker build -t activ:activ -f Dockerfile ."
+                    sh "docker build -t activ:activ ."
 
                     // Deploy the containers using Docker Compose
                     sh "docker-compose up -d"
