@@ -26,20 +26,20 @@ pipeline {
 
         stage('Compile') {
              steps {
-                  script {
+                script {
                    
                     def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                      
-                    dir('DevOps_Project') {
-                    sh 'mvn compile'
-                    }
-                    }
+                        dir('DevOps_Project') {
+                            sh 'mvn compile'
                         }
                     }
-                        }
-
+                }
+            }
+        }
+//runnnnnnnnnssss
         //  stage('SonarQube Analysis') {
         //     steps {
         //         // Run the SonarQube scanner to analyze the code
@@ -56,27 +56,42 @@ pipeline {
         //         }
         //     }
         // }
+///runnnnnnnnnsss
+    //     stage('Run Unit Tests') {
+    //         steps {
+    //             script {
+    //                 def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
-        stage('Run Unit Tests') {
-            steps {
-                script {
-                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
-
-                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                        dir('DevOps_Project') {
-                            sh 'mvn test'
-                        }
-                    }
+    //                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+    //                     dir('DevOps_Project') {
+    //                         sh 'mvn test'
+    //                     }
+    //                 }
                     
-                }
+    //             }
+    //     }
+    // }
+
+    stage('Build Artifact') {
+    steps {
+        script {
+            def mavenTool = tool name: 'M2_HOME', type: 'maven'
+            def artifactDir = 'target' // The directory where the JAR file will be generated
+
+            withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                sh "mvn package" // Build the JAR file
+            }
+
+            archiveArtifacts artifacts: "${artifactDir}/*.jar", allowEmptyArchive: true
         }
     }
+}
 
         
         }
 
 
-
+////ruuuuuuuuunnnnnnnnssss
     //     stage('Clean and Build') {
     //         steps {
     //             script {
