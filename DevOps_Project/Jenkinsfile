@@ -166,7 +166,7 @@ stage('Deploy Docker Image') {
         
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                     // Build the Docker image
-                    sh "docker build -t activ:activ ."
+                     sh "docker build -t activ:activ -f Dockerfile ."
 
                     // Deploy the containers using Docker Compose
                     sh "docker-compose up -d"
