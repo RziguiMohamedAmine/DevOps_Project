@@ -156,23 +156,23 @@ pipeline {
 
 stage('Deploy Docker Image') {
     steps {
-        script {
-            def mavenTool = tool name: 'M2_HOME', type: 'maven'
+        steps {
+                script {
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
+                    def dockerBuildDir = 'DevOps_Project'
 
-            echo "Current directory: ${pwd()}"
+                    dir(dockerBuildDir) {
+                        withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                            // Build the Docker image
+                            sh "docker build -t activ:activ -f Dockerfile ."
 
-            dir('DevOps_Project') {
-                echo "Working directory for Docker: ${pwd()}"
-                withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                    // Build the Docker image using the Dockerfile in the current directory
-                    sh "docker build -t activ:activ -f Dockerfile ."
-
-                    // Deploy the containers using Docker Compose
-                    sh "docker-compose up -d"
+                            // Deploy the containers using Docker Compose
+                            sh "docker-compose up -d"
+                        }
+                    }
                 }
-            }
-        }
     }
+}
 }
 
 
