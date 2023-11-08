@@ -150,23 +150,22 @@ pipeline {
 //     }
 // }
 
-
 stage('Deploy Docker Image') {
     steps {
         script {
-            
             def mavenTool = tool name: 'M2_HOME', type: 'maven'
             def dockerBuildDir = 'activityModule/DevOps_Project/DevOps_Project'
 
-            echo " OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: ${pwd()}"
-        
+            echo "Current directory: ${pwd()}"
+
+            // Define the full path to the Dockerfile
+            def dockerfilePath = "${dockerBuildDir}/Dockerfile"
 
             dir(dockerBuildDir) {
-                echo " OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: ${pwd()}"
-        
+                echo "Working directory for Docker: ${pwd()}"
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                    // Build the Docker image
-                     sh "docker build -t activ:activ -f Dockerfile ."
+                    // Build the Docker image using the specified Dockerfile
+                    sh "docker build -t activ:activ -f ${dockerfilePath} ."
 
                     // Deploy the containers using Docker Compose
                     sh "docker-compose up -d"
@@ -175,6 +174,7 @@ stage('Deploy Docker Image') {
         }
     }
 }
+
 
 
 
