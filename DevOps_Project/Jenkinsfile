@@ -107,26 +107,52 @@ pipeline {
         //     }
         // }
 
-         stage('Deploy') {
-            steps {
-                script {
-                    // Use the 'M2_HOME' tool defined in the 'tools' section
-                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
+//////dosent't run
+        //  stage('Nexus') {
+        //    steps {
+        //     script {
+        //     // Check if the 'maven-releases' repository already exists
+        //     def repositoryExists = sh(command: 'docker exec -it nexus3 /nexus-data/bin/nexus3 list-repositories', captureOutput: true).contains('maven-releases')
 
-                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                        dir('DevOps_Project') {
-                            sh 'mvn deploy'
-                        }
-                    }
-                }
-            }
-         
-         }
+        //     // Create the repository if it doesn't exist
+        //     if (!repositoryExists) {
+        //         sh 'docker exec -it nexus3 /nexus-data/bin/nexus3 create-repository --name maven-releases'
+        //     }
+
+        //     // Use the 'M2_HOME' tool defined in the 'tools' section
+        //     def mavenTool = tool name: 'M2_HOME', type: 'maven'
+
+        //     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+        //         dir('DevOps_Project') {
+        //             // Deploy the artifact to the 'maven-releases' repository
+        //             sh 'mvn deploy -DnexusUrl=http://192.168.33.10:8081/repository/maven-releases/'
+        //         }
+        //     }
+        //     }
+        //     }
+        // }
     
+//     stage('Deploy with Docker Compose') {
+//     steps {
+//         script {
+//             // Use Docker Compose to deploy your application
+//             dir('DevOps_Project') {
+//                 // Ensure Docker Compose is installed
+//                 sh 'docker-compose --version'
+
+//                 // Use Docker Compose to start your containers
+//                 sh 'docker-compose up -d'
+
+//                 // You can also include other Docker Compose commands, such as 'docker-compose build' or 'docker-compose down'
+//             }
+//         }
+//     }
+// }
+
 
 
         
-        }
+    }
 
 
 }
