@@ -155,7 +155,7 @@ pipeline {
             steps {
                 script {
                     def mavenTool = tool name: 'M2_HOME', type: 'maven'
-                    def artifactDir = 'target'
+                    def artifactDir = 'DevOps_Project/target'
 
                     dir('DevOps_Project') {
                         withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
