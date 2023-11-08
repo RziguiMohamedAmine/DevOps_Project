@@ -60,7 +60,7 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 script {
-                    def mavenTool = tool name: 'M2_HOME', type: 'Maven'
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                         dir('DevOps_Project') {
@@ -71,7 +71,9 @@ pipeline {
                 }
         }
     }
-}
+
+        
+        }
 
 
 
