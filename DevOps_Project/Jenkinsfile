@@ -153,21 +153,17 @@ pipeline {
 stage('Deploy Docker Image') {
     steps {
         script {
+            
             def mavenTool = tool name: 'M2_HOME', type: 'maven'
-            def artifactDir = 'activityModule/DevOps_Project/target'
-            def dockerBuildDir = '/var/lib/jenkins/workspace/DevOps_Project_p/activityModule/DevOps_Project/DevOps_Project'
+            def dockerBuildDir = 'activityModule/DevOps_Project'
 
-            echo "Current directory: ${pwd()}"
-            echo "Docker build context:"
-            sh "ls -al ${dockerBuildDir}"
+            echo " OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: ${pwd()}"
+        
 
             dir(dockerBuildDir) {
+                echo " OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: ${pwd()}"
+        
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                    // Print the working directory
-                    sh "pwd"
-                    // List directory contents
-                    sh "ls -al"
-
                     // Build the Docker image
                     sh "docker build -t activ:activ ."
 
