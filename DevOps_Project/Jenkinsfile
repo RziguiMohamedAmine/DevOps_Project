@@ -155,9 +155,9 @@ pipeline {
             steps {
                 script {
                     def mavenTool = tool name: 'M2_HOME', type: 'maven'
-                    def artifactDir = 'DevOps_Project/target'
+                    def artifactDir = 'activityModule/DevOps_Project/target'
 
-                    dir('DevOps_Project') {
+                    dir('activityModule/DevOps_Project/DevOps_Project') {
                         withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                             // Build the Docker image
                             sh "docker build -t activ:activ ."
