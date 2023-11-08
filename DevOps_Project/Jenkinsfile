@@ -150,21 +150,26 @@ pipeline {
 // }
 
 
-
- stage('Deploy Docker Image') {
+stage('Deploy Docker Image') {
     steps {
         script {
             def mavenTool = tool name: 'M2_HOME', type: 'maven'
             def artifactDir = 'activityModule/DevOps_Project/target'
+            def dockerBuildDir = '/var/lib/jenkins/workspace/DevOps_Project_p/activityModule/DevOps_Project/DevOps_Project'
 
-            dir('activityModule/DevOps_Project/DevOps_Project') {
+            echo "Current directory: ${pwd()}"
+            echo "Docker build context:"
+            sh "ls -al ${dockerBuildDir}"
+
+            dir(dockerBuildDir) {
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                    // Build the Docker image
+                    // Print the working directory
                     sh "pwd"
-sh "ls -al /var/lib/jenkins/workspace/DevOps_Project_p/activityModule/DevOps_Project/DevOps_Project"
+                    // List directory contents
+                    sh "ls -al"
 
-                    sh "docker build -t activ:activ -f /var/lib/jenkins/workspace/DevOps_Project_p/activityModule/DevOps_Project/DevOps_Project/Dockerfile ."
-
+                    // Build the Docker image
+                    sh "docker build -t activ:activ -f Dockerfile ."
 
                     // Deploy the containers using Docker Compose
                     sh "docker-compose up -d"
