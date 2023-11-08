@@ -160,7 +160,8 @@ pipeline {
             dir('activityModule/DevOps_Project/DevOps_Project') {
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                     // Build the Docker image
-                    sh "docker build -t activ:activ -f activityModule/DevOps_Project/DevOps_Project/Dockerfile ."
+                    sh "cd activityModule/DevOps_Project/DevOps_Project && docker build -t activ:activ -f Dockerfile ."
+
                     // Deploy the containers using Docker Compose
                     sh "docker-compose up -d"
                 }
