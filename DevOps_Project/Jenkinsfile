@@ -152,23 +152,24 @@ pipeline {
 
 
  stage('Deploy Docker Image') {
-            steps {
-                script {
-                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
-                    def artifactDir = 'activityModule/DevOps_Project/target'
+    steps {
+        script {
+            def mavenTool = tool name: 'M2_HOME', type: 'maven'
+            def artifactDir = 'activityModule/DevOps_Project/target'
 
-                    dir('activityModule/DevOps_Project/DevOps_Project') {
-                        withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                            // Build the Docker image
-                           sh "docker build -t activ:activ -f Dockerfile ."
+            dir('activityModule/DevOps_Project/DevOps_Project') {
+                withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                    // Build the Docker image
+                    sh "docker build -t activ:activ -f DevOps_Project/Dockerfile ."
 
-                            // Deploy the containers using Docker Compose
-                            sh "docker-compose up -d"
-                        }
-                    }
+                    // Deploy the containers using Docker Compose
+                    sh "docker-compose up -d"
                 }
             }
         }
+    }
+}
+
 
 
 
