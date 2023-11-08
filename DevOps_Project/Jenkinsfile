@@ -79,7 +79,9 @@ pipeline {
             def artifactDir = 'target' // The directory where the JAR file will be generated
 
             // Change the working directory to your project's directory (where the POM file is located)
-            dir('DevOps_Project/activityModule/DevOps_Project') {
+            dir('DevOps_Project') {
+                echo "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW${pwd()}"
+
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                     sh "mvn package" // Build the JAR file
                 
@@ -159,7 +161,7 @@ stage('Deploy Docker Image') {
 
             echo "Current directory: ${pwd()}"
 
-            dir('DevOps_Project/activityModule/DevOps_Project') {
+            dir('DevOps_Project') {
                 echo "Working directory for Docker: ${pwd()}"
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
                     // Build the Docker image using the Dockerfile in the current directory
