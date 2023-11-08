@@ -71,24 +71,24 @@ pipeline {
     //             }
     //     }
     // }
-// ////runssssssssssssssss
-//    stage('Build Artifact') {
-//     steps {
-//         script {
-//             def mavenTool = tool name: 'M2_HOME', type: 'maven'
-//             def artifactDir = 'target' // The directory where the JAR file will be generated
+////runssssssssssssssss
+   stage('Build Artifact') {
+    steps {
+        script {
+            def mavenTool = tool name: 'M2_HOME', type: 'maven'
+            def artifactDir = 'target' // The directory where the JAR file will be generated
 
-//             // Change the working directory to your project's directory (where the POM file is located)
-//             dir('DevOps_Project/DevOps_Project') {
-//                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-//                     sh "mvn package" // Build the JAR file
-//                 }
-//             }
+            // Change the working directory to your project's directory (where the POM file is located)
+            dir('DevOps_Project/DevOps_Project') {
+                withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                    sh "mvn package" // Build the JAR file
+                }
+            }
 
-//             archiveArtifacts artifacts: "${artifactDir}/*.jar", allowEmptyArchive: true
-//         }
-//     }
-// }
+            archiveArtifacts artifacts: "${artifactDir}/*.jar", allowEmptyArchive: true
+        }
+    }
+}
 
 
 ///NOT IN USE
@@ -148,6 +148,28 @@ pipeline {
 //         }
 //     }
 // }
+
+
+
+ stage('Deploy Docker Image') {
+            steps {
+                script {
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
+                    def artifactDir = 'target'
+
+                    dir('DevOps_Project') {
+                        withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                            // Build the Docker image
+                            sh "docker build -t activ:activ ."
+
+                            // Deploy the containers using Docker Compose
+                            sh "docker-compose up -d"
+                        }
+                    }
+                }
+            }
+        }
+
 
 
 

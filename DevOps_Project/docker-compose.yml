@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  mysqlDev-container:
+    container_name: mysqlDev-container
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - sqldata:/var/lib/mysql
+
+  devops-project:
+    build:
+      context: ././activityModule/DevOps_Project
+      dockerfile: Dockerfile  # Name of your Dockerfile
+    container_name: devops-project
+    depends_on:
+      - mysqlDev-container
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+
+volumes:
+  sqldata:
