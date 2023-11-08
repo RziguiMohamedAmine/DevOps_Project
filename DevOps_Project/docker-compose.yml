@@ -14,7 +14,7 @@ services:
 
   devops-project:
     build:
-      context: ././activityModule/DevOps_Project
+      context: ./activityModule/DevOps_Project  # Adjusted path to the Dockerfile location
       dockerfile: Dockerfile  # Name of your Dockerfile
     container_name: devops-project
     depends_on:
