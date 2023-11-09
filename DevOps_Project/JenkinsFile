@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+ stages {
+
+
+
+
+    stage('Github') {
+            steps {
+
+              git branch : InvoiceModule , url: 'https://github.com/RziguiMohamedAmine/DevOps_Project.git' , credentialsId:'git'
+
+               sh 'git branch'
+
+            }
+        }
+        }
+        }
