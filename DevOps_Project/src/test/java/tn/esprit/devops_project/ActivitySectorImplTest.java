@@ -1,17 +1,14 @@
-package tn.esprit.devops_project.services;
+package tn.esprit.devops_project;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.devops_project.entities.ActivitySector;
 import tn.esprit.devops_project.repositories.ActivitySectorRepository;
-
-import java.util.ArrayList;
+import tn.esprit.devops_project.services.ActivitySectorImpl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
