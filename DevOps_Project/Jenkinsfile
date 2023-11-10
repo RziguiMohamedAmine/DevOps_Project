@@ -141,7 +141,7 @@ pipeline {
         steps {
             script {
                 // Build the Docker image
-                sh 'docker build -t DevOps_Project/DevOps_Project .'
+                sh 'docker build -t wassimdhaouadi/DevOps_Project .'
             }
         }
 
