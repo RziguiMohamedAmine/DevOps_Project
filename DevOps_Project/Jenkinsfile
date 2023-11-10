@@ -140,22 +140,14 @@ pipeline {
     stage('Build Docker Image') {
         steps {
             script {
+              dir('DevOps_Project') {
                 // Build the Docker image
                 sh 'docker build -t wassimdhaouadi/devops_project .'
             }
+            }
         }
-
-
-
-
-
-
-
-
-        
-    
-
-
     }
+
+
 }
 } 
