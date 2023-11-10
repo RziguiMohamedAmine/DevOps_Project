@@ -87,7 +87,7 @@ pipeline {
                 
             
 
-            archiveArtifacts artifacts: "${artifactDir}/*.jar", allowEmptyArchive: true
+            archiveArtifacts artifacts: "${artifactDir}/DevOps_Project.jar", allowEmptyArchive: true
             }
         }
         }
@@ -136,45 +136,14 @@ pipeline {
         //     }
         // }
     
-//     stage('Deploy with Docker Compose') {
-//     steps {
-//         script {
-//             // Use Docker Compose to deploy your application
-//             dir('DevOps_Project') {
-//                 // Ensure Docker Compose is installed
-//                 sh 'docker-compose --version'
-
-//                 // Use Docker Compose to start your containers
-//                 sh 'docker-compose up -d'
-
-//                 // You can also include other Docker Compose commands, such as 'docker-compose build' or 'docker-compose down'
-//             }
-//         }
-//     }
-// }
-        
-stage('Deploy Docker Image') {
-    
+    //build docker image 
+    stage('Build Docker Image') {
         steps {
-                script {
-                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
-                    def dockerBuildDir = 'DevOps_Project'
-
-                    dir(dockerBuildDir) {
-                        withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                            // Build the Docker image
-                            sh"mvn package"
-                            sh "docker build -t activ:activ -f Dockerfile ."
-
-                            // Deploy the containers using Docker Compose
-                            sh "docker-compose up -d"
-                        }
-                    }
-                }
+            script {
+                // Build the Docker image
+                sh 'docker build -t DevOps_Project/DevOps_Project .'
+            }
         }
-    
-}
-
 
 
 

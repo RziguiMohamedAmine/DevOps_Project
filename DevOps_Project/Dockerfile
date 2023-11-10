@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 8082
-COPY DevOps_Project/target/DevOps_Project-1.0.jar /app.jar
+COPY target/DevOps_Project.jar /DevOps_Project.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]

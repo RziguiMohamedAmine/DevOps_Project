@@ -69,6 +69,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>DevOps_Project</finalName>
         
     </build>
 
