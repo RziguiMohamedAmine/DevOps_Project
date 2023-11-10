@@ -87,7 +87,7 @@ pipeline {
                 
             
 
-            archiveArtifacts artifacts: "${artifactDir}/DevOps_Project.jar", allowEmptyArchive: true
+            archiveArtifacts artifacts: "${artifactDir}/devops_project.jar", allowEmptyArchive: true
             }
         }
         }
@@ -141,7 +141,7 @@ pipeline {
         steps {
             script {
                 // Build the Docker image
-                sh 'docker build -t wassimdhaouadi/DevOps_Project .'
+                sh 'docker build -t wassimdhaouadi/devops_project .'
             }
         }
 
