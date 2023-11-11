@@ -92,7 +92,7 @@ pipeline {
         }
         }
     }
-}
+    }
 
 
 ///NOT IN USE
@@ -111,7 +111,7 @@ pipeline {
         //     }
         // }
 
-//////dosent't run
+     //////dosent't run
         //  stage('Nexus') {
         //    steps {
         //     script {
@@ -138,42 +138,40 @@ pipeline {
     
     //build docker image 
     //RRUUNNNNNNSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-    stage('Build Docker Image') {
-        steps {
-            script {
-              dir('DevOps_Project') {
-                // Build the Docker image
-                sh 'docker build -t wassimdhaouadi/devops_project .'
-            }
-            }
-        }
-    }
+    // stage('Build Docker Image') {
+    //     steps {
+    //         script {
+    //           dir('DevOps_Project') {
+    //             // Build the Docker image
+    //             sh 'docker build -t wassimdhaouadi/devops_project .'
+    //         }
+    //         }
+    //     }
+    // }
 
-    stage('PUSH Docker Image to HUB') {
-        steps {
-            script {
-              dir('DevOps_Project') {
-               withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+    // stage('PUSH Docker Image to HUB') {
+    //     steps {
+    //         script {
+    //           dir('DevOps_Project') {
+    //            withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
              
-                // Push the Docker image to Docker Hub
-                sh 'docker login -u wassimdhaouadi -p ${dockerhubpwd}'
-                sh 'docker push wassimdhaouadi/devops_project'}
-            }
-            }
-        }
-    }
+    //             // Push the Docker image to Docker Hub
+    //             sh 'docker login -u wassimdhaouadi -p ${dockerhubpwd}'
+    //             sh 'docker push wassimdhaouadi/devops_project'}
+    //         }
+    //         }
+    //     }
+    // }
 
         stage('DOCKER COMPOSE') {
             steps {
-                script {
-              dir('DevOps_Project') {
-               withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+               
         
         // Utilisez la commande 'docker build' pour construire l'image
                 
                 sh 'docker compose up -d'
-               }
-              }
+              
+              
 
        
       }
