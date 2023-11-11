@@ -117,7 +117,7 @@ pipeline {
   steps {
     script {
       // Check if the 'maven-releases' repository already exists
-      def repositoryExists = sh(script: 'docker exec -it nexus /nexus-data/bin/nexus3 list-repositories')
+      def repositoryExists = sh(script: 'docker exec -it nexus /nexus-data/bin/nexus list-repositories')
         .grep('maven-releases')
         .trim()
         .isEmpty()
