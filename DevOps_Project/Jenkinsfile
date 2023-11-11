@@ -167,7 +167,7 @@ pipeline {
         stage('DOCKER COMPOSE') {
             steps {
                
-        ddir('DevOps_Project') {
+        dir('DevOps_Project') {
         // Utilisez la commande 'docker build' pour construire l'image
                 
                 sh 'docker compose up -d'
