@@ -117,7 +117,7 @@ pipeline {
   steps {
     script {
       // Check if the 'maven-releases' repository already exists
-      sh 'docker exec -it nexus /nexus-data/bin/nexus3 list-repositories'
+    
 
       // Use the 'M2_HOME' tool defined in the 'tools' section
       def mavenTool = tool name: 'M2_HOME', type: 'maven'
