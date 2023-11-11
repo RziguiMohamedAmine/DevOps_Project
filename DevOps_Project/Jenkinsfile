@@ -113,29 +113,29 @@ pipeline {
         // }
 
      //////dosent't run
-        //  stage('Nexus') {
-        //    steps {
-        //     script {
-        //     // Check if the 'maven-releases' repository already exists
-        //     def repositoryExists = sh(command: 'docker exec -it nexus3 /nexus-data/bin/nexus3 list-repositories', captureOutput: true).contains('maven-releases')
+         stage('Nexus') {
+           steps {
+            script {
+            // Check if the 'maven-releases' repository already exists
+            def repositoryExists = sh(command: 'docker exec -it nexus3 /nexus-data/bin/nexus3 list-repositories', captureOutput: true).contains('maven-releases')
 
-        //     // Create the repository if it doesn't exist
-        //     if (!repositoryExists) {
-        //         sh 'docker exec -it nexus3 /nexus-data/bin/nexus3 create-repository --name maven-releases'
-        //     }
+            // Create the repository if it doesn't exist
+            if (!repositoryExists) {
+                sh 'docker exec -it nexus3 /nexus-data/bin/nexus3 create-repository --name maven-releases'
+            }
 
-        //     // Use the 'M2_HOME' tool defined in the 'tools' section
-        //     def mavenTool = tool name: 'M2_HOME', type: 'maven'
+            // Use the 'M2_HOME' tool defined in the 'tools' section
+            def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
-        //     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-        //         dir('DevOps_Project') {
-        //             // Deploy the artifact to the 'maven-releases' repository
-        //             sh 'mvn deploy -DnexusUrl=http://192.168.33.10:8081/repository/maven-releases/'
-        //         }
-        //     }
-        //     }
-        //     }
-        // }
+            withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                dir('DevOps_Project') {
+                    // Deploy the artifact to the 'maven-releases' repository
+                    sh 'mvn deploy -DnexusUrl=http://192.168.33.10:8081/repository/maven-releases/'
+                }
+            }
+            }
+            }
+        }
     
     //build docker image 
     //RRUUNNNNNNSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
@@ -164,19 +164,19 @@ pipeline {
     //     }
     // }
 
-        stage('DOCKER COMPOSE') {
-            steps {
+    //     stage('DOCKER COMPOSE') {
+    //         steps {
                
-        dir('DevOps_Project') {
-        // Utilisez la commande 'docker build' pour construire l'image
+    //     dir('DevOps_Project') {
+    //     // Utilisez la commande 'docker build' pour construire l'image
                 
-                sh 'docker compose up -d'
-        }
+    //             sh 'docker compose up -d'
+    //     }
               
 
        
-      }
-     }
+    //   }
+    //  }
 
 
 }
