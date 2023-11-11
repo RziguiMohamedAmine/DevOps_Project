@@ -113,24 +113,24 @@ pipeline {
         // }
 
      //////dosent't run
-        stage('Nexus') {
-  steps {
-    script {
-      // Check if the 'maven-releases' repository already exists
+//         stage('Nexus') {
+//   steps {
+//     script {
+//       // Check if the 'maven-releases' repository already exists
     
 
-      // Use the 'M2_HOME' tool defined in the 'tools' section
-      def mavenTool = tool name: 'M2_HOME', type: 'maven'
+//       // Use the 'M2_HOME' tool defined in the 'tools' section
+//       def mavenTool = tool name: 'M2_HOME', type: 'maven'
 
-      withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-        dir('DevOps_Project') {
-          // Deploy the artifact to the 'maven-releases' repository
-          sh 'mvn deploy '
-        }
-      }
-    }
-  }
-}
+//       withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+//         dir('DevOps_Project') {
+//           // Deploy the artifact to the 'maven-releases' repository
+//           sh 'mvn deploy '
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 
