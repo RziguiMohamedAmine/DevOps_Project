@@ -10,6 +10,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
   devops-project:
+    container_name: my-spring-app
     depends_on:
       - mysqldb
     build: ./
