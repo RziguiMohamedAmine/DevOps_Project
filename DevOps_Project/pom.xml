@@ -10,9 +10,19 @@
     </parent>
     <groupId>tn.esprit</groupId>
     <artifactId>DevOps_Project</artifactId>
-    <version>2.1</version>
+    <version>1.0</version>
     <name>DevOps_Project</name>
     <description>DevOps_Project</description>
+
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Repository</name>
+            <url>http://192.168.33.10:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
+
     <properties>
         <java.version>8</java.version>
     </properties>
@@ -51,6 +61,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>0.8.7</version>
+            <scope>test</scope>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
@@ -67,7 +86,73 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <executions>
+                    <!--first execution : for preparing JaCoCo runtime agent-->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!--second execution : for creating code coverage reports-->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.4.0.905</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+
+
     </build>
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>test</id>
+                <build>
+                    <testResources>
+                        <testResource>
+                            <directory>src/test/resources</directory>
+                            <filtering>true</filtering>
+                        </testResource>
+                    </testResources>
+                </build>
+
+        </profile>
+    </profiles>
 
 </project>
