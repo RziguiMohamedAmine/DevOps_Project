@@ -5,10 +5,7 @@ services:
     image: mysql:latest
     restart: unless-stopped
     environment:
-      #MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      #MYSQL_DATABASE: devops
+      - MYSQL_ROOT_PASSWORD=root
     ports:
       - "3306:3306"
     volumes:
@@ -20,6 +17,7 @@ services:
       - mysqlDev-container
     build: ./
     restart: on-failure
+    image: spring-boot
     ports:
       - "8082:8082"
     volumes:
