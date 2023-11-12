@@ -1,8 +1,7 @@
 version: '2'
 services:
-  mysqlDev-container:
-    container_name: mysqlDev-container
-    image: mysql:latest
+  mysqldb:
+    image: mysql
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -11,9 +10,8 @@ services:
     volumes:
       - sqldata:/var/lib/mysql
   devops-project:
-    container_name: devops-project
     depends_on:
-      - mysqlDev-container
+      - mysqldb
     build: ./
     restart: on-failure
     image: spring-boot
