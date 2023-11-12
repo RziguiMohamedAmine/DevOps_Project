@@ -10,7 +10,6 @@ services:
       - "3306:3306"
     volumes:
       - sqldata:/var/lib/mysql
-
   devops-project:
     container_name: devops-project
     depends_on:
@@ -19,11 +18,10 @@ services:
     restart: on-failure
     image: spring-boot
     ports:
-      - "8082:8082"
+      - "8083:8082"
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-
 volumes:
   sqldata:
