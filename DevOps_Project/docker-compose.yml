@@ -30,5 +30,6 @@ volumes:
   sqldata:
 
 networks:
-  my-network:  
-    external: true
+  default:
+    external:
+      name: my-network
