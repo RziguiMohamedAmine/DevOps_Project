@@ -23,6 +23,20 @@ pipeline {
                 }
             }
         }
+         stage('SONAR QUBE') {
+            steps {
+                // Run the SonarQube scanner to analyze the code
+                script {
+                    def scanner = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withEnv(["PATH+SONAR_RUNNER=${scanner}/bin"]) {
+                       dir('DevOps_Project') { 
+                        sh 'mvn clean verify sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=sqa_4a8a2f824e2d4c5d25101d09ecd5818dce546bb9'
+                        'mvn clean verify sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=Devops-token'
+                    }
+                    }
+                }
+            }
+        }
 
     } 
 } 
