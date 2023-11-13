@@ -24,21 +24,5 @@ pipeline {
             }
         }
 
-
-        // stage('Compile') {
-        //      steps {
-        //         script {
-                   
-        //             def mavenTool = tool name: 'M2_HOME', type: 'maven'
-
-        //             withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                     
-        //                 dir('DevOps_Project') {
-        //                     sh 'mvn compile'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
+    } 
 } 
