@@ -14,6 +14,7 @@ services:
 
     # backend application service
   devops_project:
+    container_name: devops_project
     depends_on:
       - mysqldb
     build: ./
