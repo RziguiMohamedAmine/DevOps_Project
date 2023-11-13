@@ -2,7 +2,7 @@ version: '3.8'
 services:
   devops_project:
     container_name: devops_project
-    image: wassimdhaouadi/devops_project
+    image: zied159/devops_project
     restart: on-failure
     depends_on:
       - mysqldb
