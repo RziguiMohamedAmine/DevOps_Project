@@ -5,15 +5,15 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
-      - 3306:3306  # Map the container's port 3306 to host port 3306
+      - "3306:3306"  # Map the container's port 3306 to host port 3306
     volumes:
       - db:/var/lib/mysql
 
   devops_project:
     container_name: devops_project
-    image: wassimdhaouadi/devops_project 
+    image: wassimdhaouadi/devops_project
     restart: on-failure
     depends_on:
       - mysqlDev-container
