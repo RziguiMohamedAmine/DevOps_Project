@@ -12,17 +12,17 @@ services:
     volumes:
       - sqldata:/var/lib/mysql
 
- devops-project:
-  image: wassimdhaouadi/devops_project
-  restart: on-failure
-  depends_on:
-    - mysqlDev-container
-  ports:
-    - "8765:8765"
-  volumes:
-    - .m2:/root/.m2
-  stdin_open: true
-  tty: true
+  devops-project:
+    image: wassimdhaouadi/devops_project  # Replace with your Spring Boot image
+    restart: on-failure
+    depends_on:
+      - mysqlDev-container
+    ports:
+      - "8765:8765"
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
 
 volumes:
   sqldata:
