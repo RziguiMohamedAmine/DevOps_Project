@@ -1,28 +1,23 @@
 version: '3.8'
 services:
-  mysqlDev-container:
-    container_name: mysqlDev-container
-    image: mysql:5.7
-    restart: unless-stopped
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    ports:
-      - "3306:3306"  # Map the container's port 3306 to host port 3306
-    volumes:
-      - db:/var/lib/mysql
-
   devops_project:
     container_name: devops_project
     image: wassimdhaouadi/devops_project
     restart: on-failure
     depends_on:
-      - mysqlDev-container
+      - mysqldb
     ports:
       - "8765:8765"
     volumes:
       - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-
-volumes:
-  db:
+    build: .
+  mysqldb:
+    container_name: mysqldb
+    image: "mysql:5.7"
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "devopsapp"
+    ports:
+      - "3307:3306"  
+    
