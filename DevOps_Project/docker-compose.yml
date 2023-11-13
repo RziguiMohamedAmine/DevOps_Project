@@ -18,7 +18,6 @@ services:
     restart: on-failure
     depends_on:
       - mysqlDev-container
-     command: ["./wait-for-it.sh", "mysqlDev-container:3306", "--", "java", "-jar", "/devops_project.jar"]
     ports:
       - "8765:8765"
     volumes:
