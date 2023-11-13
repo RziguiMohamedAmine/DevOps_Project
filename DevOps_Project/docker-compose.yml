@@ -29,3 +29,6 @@ services:
 volumes:
   sqldata:
 
+networks:
+  my-network:  
+    external: true
