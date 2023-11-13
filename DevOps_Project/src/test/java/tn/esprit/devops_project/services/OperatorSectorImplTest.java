@@ -8,8 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import tn.esprit.devops_project.entities.OperatorSector;
-import tn.esprit.devops_project.repositories.OperatorSectorRepository;
+import tn.esprit.devops_project.entities.Operator;
+import tn.esprit.devops_project.repositories.OperatorRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class OperatorSectorImplTest {
+class OperatorImplTest {
 
     @InjectMocks
-    private OperatorSectorImpl OperatorSectorservice;
+    private OperatorImpl Operatorservice;
 
     @Mock
-    private OperatorSectorRepository OperatorSectorRepository;
+    private OperatorRepository OperatorRepository;
 
     @BeforeEach
     public void setUp() {
@@ -34,119 +34,119 @@ class OperatorSectorImplTest {
     }
 
     @Test
-    void testretrieveAllOperatorSectors() {
+    void testretrieveAllOperators() {
 
-        List<OperatorSector> OperatorSectors = Arrays.asList(new OperatorSector(), new OperatorSector());
+        List<Operator> Operators = Arrays.asList(new Operator(), new Operator());
 
         // Mock the behavior of the repository
-        when(OperatorSectorRepository.findAll()).thenReturn(OperatorSectors);
+        when(OperatorRepository.findAll()).thenReturn(Operators);
 
         // Call the service method
-        List<OperatorSector> result = OperatorSectorservice.retrieveAllOperatorSectors();
+        List<Operator> result = Operatorservice.retrieveAllOperators();
 
         // Verify that the repository method was called and the result is as expected
-        verify(OperatorSectorRepository).findAll();
+        verify(OperatorRepository).findAll();
         assertEquals(2, result.size());
 
     }
 
     @Test
-    void addOperatorSector() {
+    void addOperator() {
 
-        OperatorSector OperatorSector = new OperatorSector();
+        Operator Operator = new Operator();
 
         // Mock the behavior of the repository
-        when(OperatorSectorRepository.save(OperatorSector)).thenReturn(OperatorSector);
+        when(OperatorRepository.save(Operator)).thenReturn(Operator);
 
         // Call the service method
-        OperatorSector result = OperatorSectorservice.addOperatorSector(OperatorSector);
+        Operator result = Operatorservice.addOperator(Operator);
 
         // Verify that the repository method was called and the result is as expected
-        verify(OperatorSectorRepository).save(OperatorSector);
-        assertEquals(OperatorSector, result);
+        verify(OperatorRepository).save(Operator);
+        assertEquals(Operator, result);
 
 
 
     }
 
     @Test
-    void deleteOperatorSector() {
+    void deleteOperator() {
 
         Long id = 1L;
 
         // Mock the behavior of the repository's deleteById method
-        doNothing().when(OperatorSectorRepository).deleteById(id);
+        doNothing().when(OperatorRepository).deleteById(id);
 
         // Call the service method
-        OperatorSectorservice.deleteOperatorSector(id);
+        Operatorservice.deleteOperator(id);
 
         // Verify that the repository's deleteById method was called
-        verify(OperatorSectorRepository).deleteById(id);
+        verify(OperatorRepository).deleteById(id);
 
 
     }
 
     @Test
-    void updateOperatorSector() {
+    void updateOperator() {
 
-        OperatorSector OperatorSector = new OperatorSector();
+        Operator Operator = new Operator();
 
         // Mock the behavior of the repository's save method
-        when(OperatorSectorRepository.save(OperatorSector)).thenReturn(OperatorSector);
+        when(OperatorRepository.save(Operator)).thenReturn(Operator);
 
         // Call the service method
-        OperatorSector result = OperatorSectorservice.updateOperatorSector(OperatorSector);
+        Operator result = Operatorservice.updateOperator(Operator);
 
         // Verify that the repository's save method was called and the result is as expected
-        verify(OperatorSectorRepository).save(OperatorSector);
-        assertEquals(OperatorSector, result);
+        verify(OperatorRepository).save(Operator);
+        assertEquals(Operator, result);
 
 
 
     }
 
     @Test
-    void retrieveOperatorSector() {
-        OperatorSector OperatorSector = new OperatorSector();
+    void retrieveOperator() {
+        Operator Operator = new Operator();
         Long id = 1L;
 
         // Mock the behavior of the repository
-        when(OperatorSectorRepository.findById(id)).thenReturn(Optional.of(OperatorSector));
+        when(OperatorRepository.findById(id)).thenReturn(Optional.of(Operator));
 
         // Call the service method
-        OperatorSector result = OperatorSectorservice.retrieveOperatorSector(id);
+        Operator result = Operatorservice.retrieveOperator(id);
 
         // Verify that the repository method was called and the result is as expected
-        verify(OperatorSectorRepository).findById(id);
-        assertEquals(OperatorSector, result);
+        verify(OperatorRepository).findById(id);
+        assertEquals(Operator, result);
 
 
     }
 
     @Test
-    void testUpdateOperatorSector_NonExisting() {
-        OperatorSector OperatorSector = new OperatorSector();
+    void testUpdateOperator_NonExisting() {
+        Operator Operator = new Operator();
 
-        when(OperatorSectorRepository.save(OperatorSector)).thenThrow(new IllegalArgumentException("OperatorSector does not exist."));
+        when(OperatorRepository.save(Operator)).thenThrow(new IllegalArgumentException("Operator does not exist."));
 
         assertThrows(IllegalArgumentException.class, () -> {
-            OperatorSectorservice.updateOperatorSector(OperatorSector);
+            Operatorservice.updateOperator(Operator);
         });
 
-        verify(OperatorSectorRepository).save(OperatorSector);
+        verify(OperatorRepository).save(Operator);
     }
 
 
     @Test
-    void testDeleteOperatorSector_NonExisting() {
+    void testDeleteOperator_NonExisting() {
         Long invalidId = 999L;
 
-        doThrow(new IllegalArgumentException("OperatorSector does not exist.")).when(OperatorSectorRepository).deleteById(invalidId);
+        doThrow(new IllegalArgumentException("Operator does not exist.")).when(OperatorRepository).deleteById(invalidId);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            OperatorSectorservice.deleteOperatorSector(invalidId);
+            Operatorservice.deleteOperator(invalidId);
         });
 
-        verify(OperatorSectorRepository).deleteById(invalidId);
+        verify(OperatorRepository).deleteById(invalidId);
     }
 }
