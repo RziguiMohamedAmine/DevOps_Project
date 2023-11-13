@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 class OperatorImplTest {
 
     @InjectMocks
-    private OperatorImpl Operatorservice;
+    private OperatorServiceImpl Operatorservice;
 
     @Mock
     private OperatorRepository OperatorRepository;
