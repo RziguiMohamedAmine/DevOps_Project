@@ -12,7 +12,7 @@ services:
     volumes:
       - sqldata:/var/lib/mysql
 
-  devops-project:
+  devops_project:
     container_name: devops_project
     image: wassimdhaouadi/devops_project 
     restart: on-failure
