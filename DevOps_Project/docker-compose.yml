@@ -10,6 +10,8 @@ services:
       - db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - mynetwork
   devops-project:
     container_name: my-spring-app
     depends_on:
@@ -22,5 +24,9 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
+    networks:
+      - mynetwork
 volumes:
   db:
+networks:
+  mynetwork:
