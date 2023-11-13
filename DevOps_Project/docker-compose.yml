@@ -3,6 +3,7 @@ services:
 
   # database application service
   mysqldb:
+    container_name: mysqldb
     image: mysql:5.7
     restart: unless-stopped
     ports:
