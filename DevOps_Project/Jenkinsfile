@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('GIT HUB CHECKOUT') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: GIT_CREDENTIAL_ID, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
