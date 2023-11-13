@@ -13,7 +13,7 @@ services:
       - sqldata:/var/lib/mysql
 
   devops-project:
-    image: wassimdhaouadi/devops_project  # Replace with your Spring Boot image
+    image: wassimdhaouadi/devops_project 
     restart: on-failure
     depends_on:
       - mysqlDev-container
