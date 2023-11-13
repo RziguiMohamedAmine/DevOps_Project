@@ -6,9 +6,9 @@ pipeline {
         maven 'M2_HOME'  // Use the correct tool name defined in Jenkins
     }
     environment {
-        GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
-        GIT_CREDENTIAL_ID = 'ZM'
         BRANCH_NAME = 'operatorModule'
+        GIT_CREDENTIAL_ID = 'ZM'
+        GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
     }
 
     stages {
