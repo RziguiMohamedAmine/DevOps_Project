@@ -12,8 +12,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     networks:
       - mynetwork
-  DevOps_Project:
-    #container_name: my-spring-app
+  devops-project:
+    container_name: my-spring-app
+    image: spring-boot
     depends_on:
       - mysqldb
     build: ./
