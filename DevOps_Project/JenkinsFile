@@ -23,14 +23,20 @@ pipeline {
                 }
             }
         }
+         stage("MAVEN CLEAN TEST") {
+            steps {
+                dir('DevOps_Project') {
+                    script {
+                        sh 'mvn clean test'
+                    }
+                }
+            }
+         }
          stage('SONAR QUBE') {
             steps {
-                script {
-                    def scanner = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withEnv(["PATH+SONAR_RUNNER=${scanner}/bin"]) {
-                       dir('DevOps_Project') {
-                        sh 'mvn clean install sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=Devops-token'
-                    }
+                dir('DevOps_Project') {
+                    withSonarQubeEnv('sonarqubeenv') {
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=admin -Dsonar.password=azerty123'
                     }
                 }
             }
