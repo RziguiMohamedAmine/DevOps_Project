@@ -2,12 +2,6 @@ pipeline {
     agent any
 
 
-    environment {
-        BRANCH_NAME = 'SupplierModule'
-        GIT_CREDENTIAL_ID = 'ZM'
-        GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
-    }
-
     stages {
         stage('GIT HUB CHECKOUT') {
             steps {
