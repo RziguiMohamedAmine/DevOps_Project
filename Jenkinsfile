@@ -12,11 +12,8 @@ pipeline {
         stage('GIT HUB CHECKOUT') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: GIT_CREDENTIAL_ID, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        dir('DevOps_Project') {
-                            checkout([$class: 'GitSCM', branches: [[name: "$BRANCH_NAME"]], userRemoteConfigs: [[url: "$GIT_REPO", credentialsId: GIT_CREDENTIAL_ID]]])
-                        }
-                    }
+                    echo "Checking out from git..."
+                    checkout scm
                 }
             }
         }
