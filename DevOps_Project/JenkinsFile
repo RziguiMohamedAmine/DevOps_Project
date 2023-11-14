@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JAVA_HOME'
+        maven 'M2_HOME'  // Use the correct tool name defined in Jenkins
+    }
+    environment {
+        BRANCH_NAME = 'SupplierModule'
+        GIT_CREDENTIAL_ID = 'ZM'
+        GIT_REPO = 'https://github.com/RziguiMohamedAmine/DevOps_Project.git'
+    }
+
+    stages {
+        stage('GIT HUB CHECKOUT') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: GIT_CREDENTIAL_ID, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        dir('DevOps_Project') {
+                            checkout([$class: 'GitSCM', branches: [[name: "$BRANCH_NAME"]], userRemoteConfigs: [[url: "$GIT_REPO", credentialsId: GIT_CREDENTIAL_ID]]])
+                        }
+                    }
+                }
+            }
+        }
+         stage('SONAR QUBE') {
+            steps {
+                script {
+                    def scanner = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withEnv(["PATH+SONAR_RUNNER=${scanner}/bin"]) {
+                       dir('DevOps_Project') {
+                        sh 'mvn clean install sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=Devops-token'
+                    }
+                    }
+                }
+            }
+        }
+
+    }
+}
