@@ -1,10 +1,7 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JAVA_HOME'
-        maven 'M2_HOME'  // Use the correct tool name defined in Jenkins
-    }
+
     environment {
         BRANCH_NAME = 'SupplierModule'
         GIT_CREDENTIAL_ID = 'ZM'
