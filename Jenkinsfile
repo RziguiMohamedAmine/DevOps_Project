@@ -30,5 +30,15 @@ pipeline {
             }
         }
 
+        stage('NEXUS DEPLOYMENT') {
+            steps {
+                dir('DevOps_Project') {
+                    script {
+                        sh 'mvn deploy'
+                    }
+                }
+            }
+        }
+
     }
 }
