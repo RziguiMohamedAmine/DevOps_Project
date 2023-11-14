@@ -24,7 +24,7 @@ services:
     volumes:
       - .m2:/root/.m2
     environment:
-      - MYSQL_HOST:mysqldb
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/devops?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     stdin_open: true
