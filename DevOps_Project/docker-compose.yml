@@ -27,7 +27,7 @@ services:
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: 'prometheus'
       MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: 'true'
       MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED: 'true'
-      MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS: 'always'
+      MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: 'always'
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url": "jdbc:mysql://mysqldb:3306/devops?createDatabaseIfNotExist=true",
         "spring.datasource.username": "root",
