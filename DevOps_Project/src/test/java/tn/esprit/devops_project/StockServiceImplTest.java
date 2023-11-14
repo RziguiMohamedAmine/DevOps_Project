@@ -170,6 +170,15 @@ class StockServiceImplTest {
     }
 
 
+    @Test
+    public void RetrieveAllStockTest() {
+
+        List<Stock> allStock = stockRepository.findAll();
+
+        assertNotNull(allStock);
+        assertTrue(allStock.size() > 0);
+    }
+
 
 
 
