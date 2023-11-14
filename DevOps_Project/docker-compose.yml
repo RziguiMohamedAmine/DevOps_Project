@@ -9,7 +9,6 @@ services:
     volumes:
       - db:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE:devopsdb
       - MYSQL_ROOT_PASSWORD=root
     networks:
       - mynetwork
