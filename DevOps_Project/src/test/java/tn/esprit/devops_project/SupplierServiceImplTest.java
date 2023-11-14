@@ -1,3 +1,5 @@
+package tn.esprit.devops_project;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
@@ -43,7 +45,7 @@ public class SupplierServiceImplTest {
     // Test for adding a supplier
     @Test
     public void addSupplierTest() {
-        Supplier supplier = new Supplier(1L,"Code1","label1", SupplierCategory.CONVENTIONNE,null);
+        Supplier supplier = new Supplier(1L,"Code1","label1", SupplierCategory.CONVENTIONNE);
         when(supplierRepository.save(supplier)).thenReturn(supplier);
         assertEquals(supplier, supplierService.addSupplier(supplier));
     }
@@ -51,7 +53,7 @@ public class SupplierServiceImplTest {
     // Test for supplier found
     @Test
     public void retreiveSupplierTest() {
-        Supplier supplier = new Supplier(2L,"Code2","label2", SupplierCategory.ORDINAIRE,null);
+        Supplier supplier = new Supplier(2L,"Code2","label2", SupplierCategory.ORDINAIRE);
         when(supplierRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(supplier));
         Supplier supplier1 = supplierService.retrieveSupplier(2L);
         Assertions.assertNotNull(supplier1);
@@ -76,7 +78,7 @@ public class SupplierServiceImplTest {
     //Test for updating a supplier
     @Test
     public void updateSupplierTest() {
-        Supplier supplier = new Supplier(1L,"Code1","label1", SupplierCategory.CONVENTIONNE,null);
+        Supplier supplier = new Supplier(1L,"Code1","label1", SupplierCategory.CONVENTIONNE);
         Mockito.when(supplierRepository.save(Mockito.any(Supplier.class))).thenReturn(supplier);
         supplier.setCode("Code15");;
         Supplier exisitingSupplier= supplierService.updateSupplier(supplier) ;
