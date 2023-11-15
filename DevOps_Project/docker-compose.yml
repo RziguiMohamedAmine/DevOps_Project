@@ -20,7 +20,7 @@ services:
     build : ./
     restart: on-failure
     ports:
-      - 8087:8087
+      - 8082:8082
     stdin_open: true
     tty: true
     environment:
