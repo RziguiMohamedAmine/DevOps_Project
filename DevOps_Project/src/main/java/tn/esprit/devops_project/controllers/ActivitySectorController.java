@@ -10,16 +10,17 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/act")
 public class ActivitySectorController {
 
     IActivitySector activitySectorService;
 
-    @GetMapping("/activitySector")
+    @GetMapping("/activitySector1")
     List<ActivitySector> retrieveAllActivitySectors(){
         return activitySectorService.retrieveAllActivitySectors();
     }
 
-    @PostMapping("/activitySector")
+    @PostMapping("/activitySector2")
     ActivitySector addActivitySector(@RequestBody ActivitySector activitySector){
         return activitySectorService.addActivitySector(activitySector);
     }
@@ -29,7 +30,7 @@ public class ActivitySectorController {
         activitySectorService.deleteActivitySector(id);
     }
 
-    @PutMapping("/activitySector")
+    @PutMapping("/activitySector3")
     ActivitySector updateActivitySector(@RequestBody ActivitySector activitySector){
         return activitySectorService.updateActivitySector(activitySector);
     }

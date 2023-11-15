@@ -17,7 +17,7 @@ services:
     container_name: devops_project
     depends_on:
       - mysqldb
-    image: wassimdhaouadi/devops_project
+    build : ./
     restart: on-failure
     ports:
       - 8087:8087
