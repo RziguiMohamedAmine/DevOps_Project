@@ -186,7 +186,7 @@ stage('Grafana Prometheus') {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: './target/site/jacoco',
+                reportDir: '.DevOps_Project/target/site/jacoco',
                 reportFiles: 'index.html',
                 reportName: 'Jacoco Code Coverage Report'
             ])
