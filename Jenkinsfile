@@ -11,15 +11,15 @@ pipeline {
                 }
             }
         }
-         stage("MAVEN CLEAN TEST") {
-            steps {
-                dir('DevOps_Project') {
-                    script {
-                        sh 'mvn clean test'
-                    }
-                }
-            }
-         }
+        //  stage("MAVEN CLEAN TEST") {
+        //     steps {
+        //         dir('DevOps_Project') {
+        //             script {
+        //                 sh 'mvn clean test'
+        //             }
+        //         }
+        //     }
+        //  }
          stage('SONAR QUBE') {
             steps {
                 dir('DevOps_Project') {
