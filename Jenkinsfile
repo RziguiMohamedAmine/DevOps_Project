@@ -11,15 +11,15 @@ pipeline {
                 }
             }
         }
-        //  stage("MAVEN CLEAN TEST") {
-        //     steps {
-        //         dir('DevOps_Project') {
-        //             script {
-        //                 sh 'mvn clean test'
-        //             }
-        //         }
-        //     }
-        //  }
+         stage("MAVEN CLEAN TEST") {
+            steps {
+                dir('DevOps_Project') {
+                    script {
+                        sh 'mvn clean test'
+                    }
+                }
+            }
+         }
          stage('SONAR QUBE') {
             steps {
                 dir('DevOps_Project') {
@@ -30,15 +30,15 @@ pipeline {
             }
         }
 
-        stage('NEXUS DEPLOYMENT') {
-            steps {
-                dir('DevOps_Project') {
-                    script {
-                        sh 'mvn deploy'
-                    }
-                }
-            }
-        }
+        // stage('NEXUS DEPLOYMENT') {
+        //     steps {
+        //         dir('DevOps_Project') {
+        //             script {
+        //                 sh 'mvn deploy'
+        //             }
+        //         }
+        //     }
+        // }
 
     }
 }
