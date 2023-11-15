@@ -11,6 +11,9 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - db:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+    networks:
+      - app-network
 
   # Spring Boot application service
   devops_project:
@@ -38,3 +41,8 @@ services:
 
 volumes:
   db:
+  mysql_data:
+  mysql_config:
+networks:
+  app-network:
+    driver: bridge
