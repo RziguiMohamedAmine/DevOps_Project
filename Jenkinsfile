@@ -46,6 +46,23 @@ pipeline {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
+               stage('BUILD DOCKER IMAGE') {
+            steps {
+                script {
+                    def dockerImage = 'zied159/alpine:1.0.0'
+                    def imageExists = sh(script: "docker inspect --type=image $dockerImage", returnStatus: true) == 0
+
+                    if (imageExists) {
+                        dir('DevOps_Project') {
+                            sh "docker build -t $dockerImage ."
+                            sh "docker push $dockerImage"
+                        }
+                    } else {
+                        echo "Docker image $dockerImage already exists. Skipping the build and push steps."
+                    }
+                }
+            }
+        }
 
     }
 }
