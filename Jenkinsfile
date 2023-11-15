@@ -63,15 +63,15 @@ pipeline {
                 }
             }
         }
-        stage('PROMETHEUS AND GRAFANA') {
-            steps {
-                script {
-                    dir('DevOps_Project') {
-                        sh 'docker-compose -f docker-compose-prometheus.yml -f docker-compose-grafana.yml up -d'
-                    }
-                }
-            }
-        }
+        // stage('PROMETHEUS AND GRAFANA') {
+        //     steps {
+        //         script {
+        //             dir('DevOps_Project') {
+        //                 sh 'docker-compose -f docker-compose-prometheus.yml -f docker-compose-grafana.yml up -d'
+        //             }
+        //         }
+        //     }
+        // }
 
     }
 }
