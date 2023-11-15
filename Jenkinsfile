@@ -1,7 +1,9 @@
 pipeline {
     agent any
 
-
+    environment {
+       DOCKERHUB_CREDENTIALS = credentials('dockertoken')
+    }
     stages {
         stage('GIT HUB CHECKOUT') {
             steps {
@@ -37,6 +39,11 @@ pipeline {
                         sh 'mvn deploy'
                     }
                 }
+            }
+        }
+        stage('DOCKER HUB PUSH') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
 
