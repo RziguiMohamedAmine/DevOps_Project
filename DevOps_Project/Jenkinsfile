@@ -36,7 +36,7 @@ pipeline {
                 echo "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW${pwd()}"
 
                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-                    sh "mvn package" // Build the JAR file
+                    sh "mvn install" // Build the JAR file
                 
             
 
