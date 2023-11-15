@@ -1,25 +1,22 @@
-package tn.esprit.devops_project.services;
+package tn.esprit.devops_project;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.devops_project.entities.ActivitySector;
 import tn.esprit.devops_project.repositories.ActivitySectorRepository;
+import tn.esprit.devops_project.services.ActivitySectorImpl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ActivitySectorImplTest {
 
     @InjectMocks
@@ -28,124 +25,105 @@ class ActivitySectorImplTest {
     @Mock
     private ActivitySectorRepository activitySectorRepository;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
-    void testretrieveAllActivitySectors() {
+    void testRetrieveAllActivitySectors() {
+        // Given
+        List<ActivitySector> activitySectors = new ArrayList<>();
+        activitySectors.add(new ActivitySector());
+        activitySectors.add(new ActivitySector());
 
-        List<ActivitySector> activitySectors = Arrays.asList(new ActivitySector(), new ActivitySector());
-
-        // Mock the behavior of the repository
         when(activitySectorRepository.findAll()).thenReturn(activitySectors);
 
-        // Call the service method
+        // When
         List<ActivitySector> result = activitySectorservice.retrieveAllActivitySectors();
 
-        // Verify that the repository method was called and the result is as expected
+        // Then
         verify(activitySectorRepository).findAll();
         assertEquals(2, result.size());
-
     }
 
     @Test
-    void addActivitySector() {
-
+    void testAddActivitySector() {
+        // Given
         ActivitySector activitySector = new ActivitySector();
 
-        // Mock the behavior of the repository
         when(activitySectorRepository.save(activitySector)).thenReturn(activitySector);
 
-        // Call the service method
+        // When
         ActivitySector result = activitySectorservice.addActivitySector(activitySector);
 
-        // Verify that the repository method was called and the result is as expected
+        // Then
         verify(activitySectorRepository).save(activitySector);
         assertEquals(activitySector, result);
-
-
-
     }
 
     @Test
-    void deleteActivitySector() {
-
+    void testDeleteActivitySector() {
+        // Given
         Long id = 1L;
 
-        // Mock the behavior of the repository's deleteById method
         doNothing().when(activitySectorRepository).deleteById(id);
 
-        // Call the service method
+        // When
         activitySectorservice.deleteActivitySector(id);
 
-        // Verify that the repository's deleteById method was called
+        // Then
         verify(activitySectorRepository).deleteById(id);
-
-
     }
 
     @Test
-    void updateActivitySector() {
-
+    void testUpdateActivitySector() {
+        // Given
         ActivitySector activitySector = new ActivitySector();
 
-        // Mock the behavior of the repository's save method
         when(activitySectorRepository.save(activitySector)).thenReturn(activitySector);
 
-        // Call the service method
+        // When
         ActivitySector result = activitySectorservice.updateActivitySector(activitySector);
 
-        // Verify that the repository's save method was called and the result is as expected
+        // Then
         verify(activitySectorRepository).save(activitySector);
         assertEquals(activitySector, result);
-
-
-
     }
 
     @Test
-    void retrieveActivitySector() {
+    void testRetrieveActivitySector() {
+        // Given
         ActivitySector activitySector = new ActivitySector();
         Long id = 1L;
 
-        // Mock the behavior of the repository
         when(activitySectorRepository.findById(id)).thenReturn(Optional.of(activitySector));
 
-        // Call the service method
+        // When
         ActivitySector result = activitySectorservice.retrieveActivitySector(id);
 
-        // Verify that the repository method was called and the result is as expected
+        // Then
         verify(activitySectorRepository).findById(id);
         assertEquals(activitySector, result);
-
-
     }
 
     @Test
     void testUpdateActivitySector_NonExisting() {
+        // Given
         ActivitySector activitySector = new ActivitySector();
 
         when(activitySectorRepository.save(activitySector)).thenThrow(new IllegalArgumentException("ActivitySector does not exist."));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            activitySectorservice.updateActivitySector(activitySector);
-        });
+        // Then
+        assertThrows(IllegalArgumentException.class, () -> activitySectorservice.updateActivitySector(activitySector));
 
         verify(activitySectorRepository).save(activitySector);
     }
 
-
     @Test
     void testDeleteActivitySector_NonExisting() {
+        // Given
         Long invalidId = 999L;
 
         doThrow(new IllegalArgumentException("ActivitySector does not exist.")).when(activitySectorRepository).deleteById(invalidId);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            activitySectorservice.deleteActivitySector(invalidId);
-        });
+        // Then
+        assertThrows(IllegalArgumentException.class, () -> activitySectorservice.deleteActivitySector(invalidId));
 
         verify(activitySectorRepository).deleteById(invalidId);
     }
