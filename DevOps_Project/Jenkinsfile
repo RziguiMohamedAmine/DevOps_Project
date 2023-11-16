@@ -24,66 +24,70 @@ pipeline {
             }
         }
 
+        // //runnnnnnnssssssss
+        stage('Run Unit Tests') {
+            steps {
+                script {
+                    def mavenTool = tool name: 'M2_HOME', type: 'maven'
+
+                    withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                        dir('DevOps_Project') {
+                            sh 'mvn test'
+                        }
+                    }
+                    
+                }
+        }
+    }
+
+    
+      
+// //runnnnnnnnnssss
+         stage('SonarQube Analysis') {
+            steps {
+                // Run the SonarQube scanner to analyze the code
+                script {
+                    // Use the SonarQube Scanner tool that you've configured in Jenkins.
+                    def scannerHome = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+
+                    // Run the SonarQube analysis
+                    withEnv(["PATH+SONAR_RUNNER=${scannerHome}/bin"]) {
+                       dir('DevOps_Project') { 
+                        sh 'mvn clean verify sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=sqa_4a8a2f824e2d4c5d25101d09ecd5818dce546bb9'
+                    }
+                    }
+                }
+            }
+        }
+
+       
+
+
          ////runssssssssssssssss
-//    stage('Build Artifact') {
-//     steps {
-//         script {
-//             def mavenTool = tool name: 'M2_HOME', type: 'maven'
-//             def artifactDir = 'target' // The directory where the JAR file will be generated
+   stage('Build Artifact') {
+    steps {
+        script {
+            def mavenTool = tool name: 'M2_HOME', type: 'maven'
+            def artifactDir = 'target' // The directory where the JAR file will be generated
 
-//             // Change the working directory to your project's directory (where the POM file is located)
-//             dir('DevOps_Project') {
-//                 echo "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW${pwd()}"
+            // Change the working directory to your project's directory (where the POM file is located)
+            dir('DevOps_Project') {
+                echo "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW${pwd()}"
 
-//                 withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-//                     sh "mvn install" // Build the JAR file
+                withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
+                    sh "mvn install" // Build the JAR file
                 
             
 
-//             archiveArtifacts artifacts: "${artifactDir}/devops_project.jar", allowEmptyArchive: true
-//             }
-//         }
-//         }
-//     }
-//     }
-// //runnnnnnnssssssss
-//         stage('Run Unit Tests') {
-//             steps {
-//                 script {
-//                     def mavenTool = tool name: 'M2_HOME', type: 'maven'
-
-//                     withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
-//                         dir('DevOps_Project') {
-//                             sh 'mvn test'
-//                         }
-//                     }
-                    
-//                 }
-//         }
-//     }
+            archiveArtifacts artifacts: "${artifactDir}/devops_project.jar", allowEmptyArchive: true
+            }
+        }
+        }
+    }
+    }
 
 
 
-      
-// //runnnnnnnnnssss
-//          stage('SonarQube Analysis') {
-//             steps {
-//                 // Run the SonarQube scanner to analyze the code
-//                 script {
-//                     // Use the SonarQube Scanner tool that you've configured in Jenkins.
-//                     def scannerHome = tool name: 'sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-
-//                     // Run the SonarQube analysis
-//                     withEnv(["PATH+SONAR_RUNNER=${scannerHome}/bin"]) {
-//                        dir('DevOps_Project') { 
-//                         sh 'mvn clean verify sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000 -Dsonar.login=sqa_4a8a2f824e2d4c5d25101d09ecd5818dce546bb9'
-//                     }
-//                     }
-//                 }
-//             }
-//         }
-
-       
 
 
 ///NOT IN USE
@@ -101,6 +105,8 @@ pipeline {
         //         }
         //     }
         // }
+
+
 
      //////dosent't run
 //         stage('Nexus') {
@@ -127,30 +133,37 @@ pipeline {
 
     // build docker image 
     // RRUUNNNNNNSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-    // stage('Build Docker Image') {
-    //     steps {
-    //         script {
-    //           dir('DevOps_Project') {
-    //             // Build the Docker image
-    //             sh 'docker build -t wassimdhaouadi/devops_project .'
-    //         }
-    //         }
-    //     }
-    // }
+    stage('Build Docker Image') {
+        steps {
+            script {
+              dir('DevOps_Project') {
+                // Build the Docker image
+                sh 'docker build -t wassimdhaouadi/devops_project .'
+            }
+            }
+        }
+    }
 
-    // stage('PUSH Docker Image to HUB') {
-    //     steps {
-    //         script {
-    //           dir('DevOps_Project') {
-    //            withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+    stage('PUSH Docker Image to HUB') {
+        steps {
+            script {
+              dir('DevOps_Project') {
+               withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
              
-    //             // Push the Docker image to Docker Hub
-    //             sh 'docker login -u wassimdhaouadi -p ${dockerhubpwd}'
-    //             sh 'docker push wassimdhaouadi/devops_project'}
-    //         }
-    //         }
-    //     }
-    // }
+                // Push the Docker image to Docker Hub
+                sh 'docker login -u wassimdhaouadi -p ${dockerhubpwd}'
+                sh 'docker push wassimdhaouadi/devops_project'}
+            }
+            }
+        }
+    }
+    stage('Grafana Prometheus') {
+            steps {
+                sh 'docker start prometheus'
+                sh 'docker start grafana'
+            }
+        }
+        
 
         stage('DOCKER COMPOSE') {
             steps {
@@ -170,13 +183,7 @@ pipeline {
 
 
 
-stage('Grafana Prometheus') {
-            steps {
-                sh 'docker start prometheus'
-                sh 'docker start grafana'
-            }
-        }
-        
+
          
      
     }
