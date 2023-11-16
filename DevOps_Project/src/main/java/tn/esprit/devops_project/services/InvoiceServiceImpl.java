@@ -27,7 +27,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
 
 	//commentaire
 	//commentaire 2 developper
-	final static NullPointerException invoiceNotFound = new NullPointerException("Invoice not found");
+	final static invoiceNotFound = new NullPointerException("Invoice not found");
 	@Override
 	public List<Invoice> retrieveAllInvoices() {
 		return invoiceRepository.findAll();
