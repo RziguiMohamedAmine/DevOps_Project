@@ -220,8 +220,7 @@ def sendCustomizedEmail() {
             attachmentsPattern: modifiedHtmlPath
         )
     }
-}
-def customizeHtml(String reportContent) {
+}def customizeHtml(String reportContent) {
     // Your existing customizeHtml method
     def customHtml = """
         <?xml version="1.0" encoding="UTF-8"?>
@@ -298,6 +297,8 @@ def customizeHtml(String reportContent) {
         </head>
         <body onload="initialSort(['breadcrumb', 'coveragetable'])">
             $reportContent
+            <body>
+            <footer>
             <div>
                 <ul>
                     <li><a href="https://twitter.com/">Twitter</a></li>
@@ -309,7 +310,7 @@ def customizeHtml(String reportContent) {
                     </li>
                 </ul>
             </div>
-        </body>
+        </footer>
         </html>
     """
 
