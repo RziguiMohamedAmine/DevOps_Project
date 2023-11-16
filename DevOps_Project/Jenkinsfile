@@ -228,6 +228,10 @@ stage('Grafana Prometheus') {
     }
     post {
     always {
+    script {
+        // Call the sendCustomizedEmail method directly
+        
+        
         publishHTML(
             target: [
                 allowMissing: false,
@@ -238,11 +242,10 @@ stage('Grafana Prometheus') {
                 reportName: 'Jacoco Code Coverage Report'
             ]
         )
-        
-        script {
-            sendCustomizedEmail()
-        }
+        sendCustomizedEmail()
     }
+}
+
 }
 
 def sendCustomizedEmail() {
