@@ -248,6 +248,8 @@ stage('Grafana Prometheus') {
 
 }
 
+
+}
 def sendCustomizedEmail() {
     script {
         def originalHtml = readFile file: "DevOps_Project/target/site/jacoco/index.html"
@@ -308,4 +310,4 @@ def customizeHtml(String reportContent) {
     return outputFile
 }
 
-} 
+ 
