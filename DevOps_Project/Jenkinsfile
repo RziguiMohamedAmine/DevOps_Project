@@ -306,7 +306,7 @@ afooter:hover {
         </head>
         <body onload="initialSort(['breadcrumb', 'coveragetable'])">
             $reportContent
-            <footer>
+            
                 <divfooter>
                     <ulfooter>
                         <lifooter><afooter href="https://twitter.com/">Twitter</afooter></lifooter>
@@ -318,7 +318,7 @@ afooter:hover {
                         </lifooter>
                     </ulfooter>
                 </divfooter>
-            </footer>
+            
         </body>
         </html>
     """
