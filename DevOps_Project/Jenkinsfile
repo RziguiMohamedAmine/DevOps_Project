@@ -1,49 +1,3 @@
-// def customizeHtml(String reportContent) {
-//     // Your custom HTML styling here
-//     def customHtml = """
-//         <?xml version="1.0" encoding="UTF-8"?>
-//         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-//         <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
-//         <head>
-//             <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-//             <style>
-//                 /* Add your custom CSS styles here */
-//                 body {
-//                     font-family: Arial, sans-serif;
-//                 }
-//                 table {
-//                     width: 80%;
-//                     margin: auto;
-//                     border-collapse: collapse;
-//                 }
-//                 th, td {
-//                     border: 1px solid #dddddd;
-//                     text-align: left;
-//                     padding: 8px;
-//                 }
-//                 th {
-//                     background-color: #f2f2f2;
-//                 }
-//             </style>
-//         </head>
-//         <body onload="initialSort(['breadcrumb', 'coveragetable'])">
-//             $reportContent
-//         </body>
-//         </html>
-//     """
-
-//     // Write the customized HTML to a file
-//     def outputFile = 'modifiedHtml.html'
-//     writeFile file: outputFile, text: customHtml
-
-//     // Return the file path
-//     return outputFile
-//     }
-
-   
-
-
-
 pipeline {
     agent any
 
@@ -267,9 +221,8 @@ def sendCustomizedEmail() {
         )
     }
 }
-
 def customizeHtml(String reportContent) {
-    // Your custom HTML styling here
+    // Your existing customizeHtml method
     def customHtml = """
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -294,10 +247,68 @@ def customizeHtml(String reportContent) {
                 th {
                     background-color: #f2f2f2;
                 }
+                a {
+                    color: white;
+                    text-decoration: none;
+                    box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
+                }
+                a:hover {
+                    box-shadow: inset 0 -1.2em 0 hsla(0, 0%, 100%, 0.4);
+                }
+                ul {
+                    display: inline-grid;
+                    grid-auto-flow: row;
+                    grid-gap: 24px;
+                    justify-items: center;
+                    margin: auto;
+                }
+                @media (min-width: 500px) {
+                    ul {
+                        grid-auto-flow: column;
+                    }
+                }
+                li:last-child {
+                    grid-column: 1 / 2;
+                    grid-row: 1 / 2;
+                }
+                li:hover ~ li p {
+                    animation: wave-animation 0.3s infinite;
+                }
+                /* below is just for demo styling */
+                div {
+                    display: flex;
+                    height: 100vh;
+                    width: 100%;
+                    background-color: #002a38;
+                    line-height: 1.3;
+                    font-family: Menlo, monospace;
+                }
+                @keyframes wave-animation {
+                    0%, 100% {
+                        transform: rotate(0deg);
+                    }
+                    25% {
+                        transform: rotate(20deg);
+                    }
+                    75% {
+                        transform: rotate(-15deg);
+                    }
+                }
             </style>
         </head>
         <body onload="initialSort(['breadcrumb', 'coveragetable'])">
             $reportContent
+            <div>
+                <ul>
+                    <li><a href="https://twitter.com/">Twitter</a></li>
+                    <li><a href="https://codepen.io/">Codepen</a></li>
+                    <li><a href="mailto:mohamedwassim.dhaouadi@gmail.com">Email</a></li>
+                    <li><a href="https://github.com/wassim20">Github</a></li>
+                    <li>
+                        <p>👋</p>
+                    </li>
+                </ul>
+            </div>
         </body>
         </html>
     """
@@ -309,5 +320,3 @@ def customizeHtml(String reportContent) {
     // Return the file path
     return outputFile
 }
-
- 
