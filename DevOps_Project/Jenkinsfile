@@ -236,9 +236,9 @@ def customizeHtml(String reportContent) {
                     font-family: Arial, sans-serif;
                 }
                 table {
-                    width: 80%;
-                    margin: auto;
+                    width: 100%; /* Set the width to 100% to make it start from the far left */
                     border-collapse: collapse;
+                    margin: auto;
                 }
                 th, td {
                     border: 1px solid #dddddd;
