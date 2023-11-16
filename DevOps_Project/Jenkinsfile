@@ -238,8 +238,10 @@ stage('Grafana Prometheus') {
                 reportName: 'Jacoco Code Coverage Report'
             ]
         )
-        
-        sendCustomizedEmail()
+
+        script {
+            sendCustomizedEmail()
+        }
     }
 }
 
