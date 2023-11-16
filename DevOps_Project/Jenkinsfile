@@ -244,38 +244,47 @@ def customizeHtml(String reportContent) {
                     text-align: left;
                     padding: 8px;
                 }
+            divfooter {
+  display: flex;
+  height: 100;
+  width: 100%;
+  background-color: #002a38;
+  line-height: 6;
+  font-family: Menlo, monospace;
+}
                 th {
                     background-color: #f2f2f2;
                 }
-                a {
-                    color: white;
-                    text-decoration: none;
-                    box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
-                }
-                a:hover {
-                    box-shadow: inset 0 -1.2em 0 hsla(0, 0%, 100%, 0.4);
-                }
-                ul {
-                    display: inline-grid;
-                    grid-auto-flow: row;
-                    grid-gap: 24px;
-                    justify-items: center;
-                    margin: auto;
-                }
+                afooter {
+  color: white;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
+}
+
+afooter:hover {
+  box-shadow: inset 0 -1.2em 0 hsla(0, 0%, 100%, 0.4);
+}
+
+               ulfooter {
+  display: inline-grid;
+  grid-auto-flow: row;
+  grid-gap: 24px;
+  justify-items: center;
+  margin: auto;
+}
                 @media (min-width: 500px) {
-                    ul {
+                    ulfooter {
                         grid-auto-flow: column;
                     }
                 }
-                li:last-child {
+                lifooter:last-child {
                     grid-column: 1 / 2;
                     grid-row: 1 / 2;
                 }
-                li:hover ~ li p {
+                lifooter:hover ~ lifooter p {
                     animation: wave-animation 0.3s infinite;
                 }
-                /* below is just for demo styling */
-               
+                
                 @keyframes wave-animation {
                     0%, 100% {
                         transform: rotate(0deg);
@@ -289,49 +298,26 @@ def customizeHtml(String reportContent) {
                 }
 
                 /* Footer styles */
-                .divfooter {
-                    display: flex;
-                    height: 100vh;
-                    width: 100%;
-                    background-color: #002a38;
-                    line-height: 1.3;
-                    font-family: Menlo, monospace;
-                }
-                ul.footer {
-                    display: inline-grid;
-                    grid-auto-flow: row;
-                    grid-gap: 24px;
-                    justify-items: center;
-                    margin: auto;
-                }
-                @media (min-width: 500px) {
-                    ul.footer {
-                        grid-auto-flow: column;
-                    }
-                }
-                lifooter {
-                    grid-column: 1 / 2;
-                    grid-row: 1 / 2;
-                }
-                lifooter:hover ~ li p {
-                    animation: wave-animation 0.3s infinite;
-                }
+                
+               
+                
+              
             </style>
         </head>
         <body onload="initialSort(['breadcrumb', 'coveragetable'])">
             $reportContent
             <footer>
-                <div class="divfooter">
-                    <ul class="footer">
-                        <lifooter><a href="https://twitter.com/">Twitter</a></lifooter>
-                        <lifooter><a href="https://codepen.io/">Codepen</a></lifooter>
-                        <lifooter><a href="mailto:mohamedwassim.dhaouadi@gmail.com">Email</a></lifooter>
-                        <lifooter><a href="https://github.com/wassim20">Github</a></lifooter>
+                <divfooter>
+                    <ulfooter>
+                        <lifooter><afooter href="https://twitter.com/">Twitter</afooter></lifooter>
+                        <lifooter><afooter href="https://codepen.io/">Codepen</afooter></lifooter>
+                        <lifooter><afooter href="mailto:mohamedwassim.dhaouadi@gmail.com">Email</afooter></lifooter>
+                        <lifooter><afooter href="https://github.com/wassim20">Github</afooter></lifooter>
                         <lifooter>
-                            <p>👋</p>
+                            <pfooter>👋</p>
                         </lifooter>
-                    </ul>
-                </div>
+                    </ulfooter>
+                </divfooter>
             </footer>
         </body>
         </html>
