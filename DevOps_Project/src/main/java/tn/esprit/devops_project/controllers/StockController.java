@@ -15,17 +15,17 @@ public class StockController {
     IStockService stockService;
 
     @PostMapping("/stock")
-    public Stock addStock(@RequestBody Stock stock){
+    Stock addStock(@RequestBody Stock stock){
         return stockService.addStock(stock);
     }
 
     @GetMapping("/stock/{id}")
-    public Stock retrieveStock(@PathVariable Long id){
+    Stock retrieveStock(@PathVariable Long id){
         return stockService.retrieveStock(id);
     }
 
     @GetMapping("/stock")
-    public List<Stock> retrieveAllStock(){
+    List<Stock> retrieveAllStock(){
         return stockService.retrieveAllStock();
     }
 
