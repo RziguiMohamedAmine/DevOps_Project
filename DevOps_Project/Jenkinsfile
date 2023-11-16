@@ -1,3 +1,49 @@
+def customizeHtml(String reportContent) {
+    // Your custom HTML styling here
+    def customHtml = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+            <style>
+                /* Add your custom CSS styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                }
+                table {
+                    width: 80%;
+                    margin: auto;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+            </style>
+        </head>
+        <body onload="initialSort(['breadcrumb', 'coveragetable'])">
+            $reportContent
+        </body>
+        </html>
+    """
+
+    // Write the customized HTML to a file
+    def outputFile = 'modifiedHtml.html'
+    writeFile file: outputFile, text: customHtml
+
+    // Return the file path
+    return outputFile
+    }
+
+   
+
+
+
 pipeline {
     agent any
 
@@ -182,6 +228,8 @@ stage('Grafana Prometheus') {
     }
     post {
         always {
+           
+
             publishHTML(target: [
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
@@ -190,6 +238,8 @@ stage('Grafana Prometheus') {
                 reportFiles: 'index.html',
                 reportName: 'Jacoco Code Coverage Report'
             ])
+             def originalHtml = readFile file: "DevOps_Project/target/site/jacoco/index.html"
+            def modifiedHtmlPath = customizeHtml(originalHtml)
             
     
     emailext (
